@@ -1,9 +1,10 @@
-module sync_w2r #(parameter ADDRSIZE = 4)(
-	output logic [ADDRSIZE:0] rq2_wptr,
-	input logic [ADDRSIZE:0] wptr,
+module sync_w2r #(parameter ADDR_WIDTH = 4)(
+	
+	output logic [ADDR_WIDTH:0] rq2_wptr,
+	input logic [ADDR_WIDTH:0] wptr,
 	input logic rclk, rrst_n);
 	
-	logic [ADDRSIZE:0] rq1_wptr;
+	logic [ADDR_WIDTH:0] rq1_wptr;
 	
 	always_ff @(posedge rclk or negedge rrst_n)
 	begin
