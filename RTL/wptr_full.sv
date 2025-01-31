@@ -5,9 +5,9 @@ module wptr_full #(parameter ADDR_WIDTH = 4)(
 	input logic [ADDR_WIDTH :0] wq2_rptr,
 	input logic winc, wclk, wrst_n);
 	
-	logic [ADDR_WIDTH:0] wbin;
-	logic [ADDR_WIDTH:0] wgraynext, wbinnext;
-	logic wfull_val;
+	bit [ADDR_WIDTH:0] wbin;
+	bit [ADDR_WIDTH:0] wgraynext, wbinnext;
+	bit wfull_val;
 	
 	// GRAYSTYLE2 pointer
 	always_ff @(posedge wclk or negedge wrst_n)
@@ -20,8 +20,8 @@ module wptr_full #(parameter ADDR_WIDTH = 4)(
 	
 	// Memory write-address pointer (okay to use binary to address memory)
 	assign waddr = wbin[ADDR_WIDTH-1:0];
-	assign wbinnext = wbin + (winc & ~wfull);
-	assign wgraynext = (wbinnext>>1) ^ wbinnext;
+	assign wbinnext = (!wrst_n) ? 0 : (wbin + (winc & ~wfull));
+	assign wgraynext = (!wrst_n) ? 0 : ((wbinnext>>1) ^ wbinnext);
 	//------------------------------------------------------------------
 	// Simplified version of the three necessary full-tests:
 	// assign wfull_val=((wgnext[ADDR_WIDTH] !=wq2_rptr[ADDR_WIDTH] ) &&

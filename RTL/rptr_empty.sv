@@ -4,9 +4,9 @@ module rptr_empty #(parameter ADDR_WIDTH = 4) (output reg rempty,
 											   input [ADDR_WIDTH :0] rq2_wptr,
 											   input rinc, rclk, rrst_n);
 
-	logic [ADDR_WIDTH:0] rbin;
-	logic [ADDR_WIDTH:0] rgraynext, rbinnext;
-	logic rempty_val;
+	bit [ADDR_WIDTH:0] rbin;
+	bit [ADDR_WIDTH:0] rgraynext, rbinnext;
+	bit rempty_val;
 
 	//-------------------
 	// GRAYSTYLE2 pointer
@@ -21,8 +21,8 @@ module rptr_empty #(parameter ADDR_WIDTH = 4) (output reg rempty,
 
 	// Memory read-address pointer (okay to use binary to address memory)
 	assign raddr = rbin[ADDR_WIDTH-1:0];
-	assign rbinnext = rbin + (rinc & ~rempty);
-	assign rgraynext = (rbinnext>>1) ^ rbinnext;
+	assign rbinnext = (!rrst_n) ? 0 : (rbin + (rinc & ~rempty));
+	assign rgraynext = (!rrst_n) ? 0 : ((rbinnext>>1) ^ rbinnext);
 
 	//---------------------------------------------------------------
 	// FIFO empty when the next rptr == synchronized wptr or on reset

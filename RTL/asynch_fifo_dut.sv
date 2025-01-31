@@ -17,7 +17,10 @@ module asynch_fifo_dut #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) (output [DATA_WID
                                                .waddr(waddr),
                                                .raddr(raddr),
                                                .wclken(winc),
+                                               .rclken(rinc),
                                                .wfull(wfull),
+                                               .rempty(rempty),
+                                               .rclk(rclk),
                                                .wclk(wclk));
 
     rptr_empty #(ADDR_WIDTH) RPTR_EMPTY (.*);
