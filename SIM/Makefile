@@ -1,17 +1,21 @@
-RTL=../RTL/*
-TB=../TB/*
-TBModule=async_fifo_top_tb
+#Makefile
+RTL=../RTL/*.sv
+TOP=../TOP/async_fifo_top.sv
+TBModule=async_fifo_top
+DUTModule=asynch_fifo_dut
 
-clean:
-	@if exist work rmdir /s /q work
-
-lib:
+lib :
 	vlib work
+	
+cmp :
+	vlog -coveropt 3 +acc +cover $(RTL) ../TEST/async_fifo_pkg.sv $(TOP) +incdir+../RTL +incdir+../ENV +incdir+../TEST
 
-cmp:
-	vlog -coveropt 3 +acc +cover $(RTL) $(TB)
+sim :
+	vsim -vopt $(TBModule) -c -do "run -all; exit"
 
-sim:
-	vsim -vopt -coverage $(TBModule) -c -do "run -all; exit"
+sim1 :
+	vsim -vopt $(TBModule) -c -do "run -all; exit" +ASYNC_FIFO_WRITE_READ_TEST
 
-all: clean lib cmp sim
+all : lib cmp sim
+
+tc1 : lib cmp sim1
