@@ -61,7 +61,76 @@ module async_fifo_top_tb;
 			rinc = 1;
 		end
 	endtask
-	
+
+	//assertions
+	//FIFO should be empty after a reset
+	property p_fifo_wrst;
+		@(posedge wclk)
+		!wrst_n |=> !wfull;
+	endproperty
+	a_fifo_wrst: assert property(p_fifo_wrst) else $error("Fifo Full should be deasserted after reset");
+
+	property p_fifo_rrst;
+		@(posedge rclk)
+		!rrst_n |=> rempty;
+	endproperty
+	a_fifo_rrst: assert property(p_fifo_rrst) else $error("Fifo Empty should be asserted after reset");
+
+	//FIFO cannot be full and empty at the same time
+	property p_fifo_empty;
+		@(posedge rclk) disable iff(rrst_n)
+		wfull |-> !rempty;
+	endproperty
+	a_fifo_empty: assert property(p_fifo_empty) else $error("Fifo Empty should be deasserted when FIFO is Full");
+
+	property p_fifo_full;
+		@(posedge wclk) disable iff(wrst_n)
+		rempty |-> !wfull;
+	endproperty
+	a_fifo_full: assert property(p_fifo_full) else $error("Fifo Full should be deasserted when FIFO is Empty");
+
+	//When rinc is high and fifo is not empty, rdata should have correct data
+	property p_stable_rdata;
+		@(posedge rclk) disable iff(rrst_n)
+		rinc && !rempty |=> $stable(rdata);
+	endproperty
+	a_stable_rdata: assert property(p_stable_rdata) else $error("rdata should have correct data when rinc is set and FIFO is not empty");
+
+	//When winc is high and fifo is not full, wdata should have correct data
+	property p_stable_wdata;
+		@(posedge wclk) disable iff(wrst_n)
+		winc && !wfull |-> $stable(wdata);
+	endproperty
+	a_stable_wdata: assert property(p_stable_wdata) else $error("wdata should be stable when winc is set and FIFO is not full");
+
+	//After a FIFO read, FIFO cannot be full
+	property p_fifoflags_wfull;
+		@(posedge wclk) disable iff(wrst_n)
+		rinc |=> !wfull;
+	endproperty
+	a_fifoflags_wfull: assert property(p_fifoflags_wfull) else $error("After a FIFO read, FIFO cannot be full");
+
+	//After a FIFO write, FIFO cannot be empty
+	property p_fifoflags_rempty;
+		@(posedge rclk) disable iff(rrst_n)
+		winc |=> !rempty;
+	endproperty
+	a_fifoflags_rempty: assert property(p_fifoflags_rempty) else $error("After a FIFO write, FIFO cannot be empty");
+
+	//If FIFO is full, it cannot be written to
+	property p_fifoflags_full;
+		@(posedge wclk) disable iff(wrst_n)
+		winc && wfull |=> !winc;
+	endproperty
+	a_fifoflags_full: assert property(p_fifoflags_full) else $error("If FIFO is full, it cannot be written to");
+
+	//If FIFO is empty, it cannot be read
+	property p_fifoflags_empty;
+		@(posedge rclk) disable iff(rrst_n)
+		rinc && rempty |=> !rinc;
+	endproperty
+	a_fifoflags_empty: assert property(p_fifoflags_empty) else $error("If FIFO is empty, it cannot be read");
+		
 	initial begin
 		wrst_n = 0;
 		rrst_n = 0;
