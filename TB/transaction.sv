@@ -1,13 +1,14 @@
 class transaction #(parameter DATA_WIDTH = 8);
-	rand logic [DATA_WIDTH-1:0] wdata;
+
+	randc logic [DATA_WIDTH-1:0] wdata;
 	rand logic winc;
 	rand logic rinc;
 	
-	constraint c1 { 
-		wdata inside {[1:DATA_WIDTH-1]};}
+	constraint wdata_c {wdata inside {[1:DATA_WIDTH-1]};}
+	constraint winc_rinc_c {{winc, rinc} != 2'b00;}
 		
-	function void print();
-		$display("Inputs: wdata = %h, winc = %b, rinc = %b",wdata,winc,rinc);
+	function void print(string s = "trans_h");
+		$display("%s, Inputs: wdata = %h, winc = %b, rinc = %b", s, wdata, winc, rinc);
 	endfunction
 	
 endclass
