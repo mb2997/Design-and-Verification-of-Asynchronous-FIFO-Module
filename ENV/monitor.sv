@@ -2,13 +2,16 @@ class monitor;
 
 	transaction trans_h;
 	virtual async_fifo_interface vif;
-	mailbox #(transaction) mon2sb;
+	mailbox #(transaction) wmon2sb;
+	mailbox #(transaction) rmon2sb;
 
 	function new(virtual async_fifo_interface vif,
-				 mailbox #(transaction) mon2sb);
+				 mailbox #(transaction) wmon2sb,
+				 mailbox #(transaction) rmon2sb);
 
 		this.vif = vif;
-		this.mon2sb = mon2sb;
+		this.wmon2sb = wmon2sb;
+		this.rmon2sb = rmon2sb;
 
 	endfunction
 
@@ -18,7 +21,6 @@ class monitor;
 		forever
 		begin
 			data_from_dut();
-			mon2sb.put(trans_h);
 		end
 
 	endtask
@@ -32,16 +34,18 @@ class monitor;
 				trans_h.wdata = vif.wdata;
 				trans_h.wfull = vif.wfull;
 				trans_h.winc = vif.winc;
+				wmon2sb.put(trans_h);
 			end
 
 			begin
-				@(posedge vif.rclk);
+				@(negedge vif.rclk);
 				trans_h.rdata = vif.rdata;
 				trans_h.rempty = vif.rempty;
 				trans_h.rinc = vif.rinc;
+				rmon2sb.put(trans_h);
 			end
 
-		join
+		join_any
 
 	endtask
 

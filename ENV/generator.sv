@@ -1,4 +1,4 @@
-class generator;
+class generator #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 
 	transaction trans_h;
 	mailbox #(transaction) gen2drv;
