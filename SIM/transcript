@@ -1,6 +1,6 @@
-# vsim -vopt async_fifo_top -c -do "run -all; exit" "+ASYNC_FIFO_WRITE_READ_TEST" 
-# Start time: 19:21:10 on Feb 16,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# vsim -vopt async_fifo_top -c -do "run -all; exit" "+ASYNC_FIFO_B2B_WRITE_READ_TEST" 
+# Start time: 15:52:49 on Feb 17,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
 # //  Questa Sim-64
 # //  Version 10.7c win64 Aug 18 2018
 # //
@@ -28,42 +28,39 @@
 # Loading work.rptr_empty(fast)
 # Loading work.wptr_full(fast)
 # run -all
-# WCLK_T/2 = 100.00
-# RCLK_T/2 = 166.67
+# WCLK_T/2 = 50.00
+# RCLK_T/2 = 58.82
 # *************************************************************************
-# 		ASYNC_FIFO_WRITE_READ_TEST is Running
+# 	ASYNC_FIFO_B2B_WRITE_READ_TEST is Running
 # *************************************************************************
-# async_fifo_write_read_gen, Inputs: wdata = 04, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 01, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 05, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 01, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 07, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 07, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 1, rinc = 0
-# async_fifo_write_read_gen, Inputs: wdata = 05, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 07, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 04, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 01, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 02, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 05, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 04, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 05, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 06, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 04, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 01, winc = 0, rinc = 1
-# async_fifo_write_read_gen, Inputs: wdata = 03, winc = 0, rinc = 1
-# ** Note: $finish    : ../TOP/async_fifo_top.sv(82)
-#    Time: 833332 ps  Iteration: 0  Instance: /async_fifo_top
-# End time: 19:21:12 on Feb 16,2025, Elapsed time: 0:00:02
+# async_fifo_b2b_write_read_test, Inputs: wdata = 103, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 213, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 199, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 144, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 27, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 214, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 45, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 236, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# async_fifo_b2b_write_read_test, Inputs: wdata = 89, rdata = x, winc = 1, rinc = 0
+# async_fifo_b2b_write_read_test, Inputs: wdata = 0, rdata = x, winc = 0, rinc = 1
+# ||MATCHED|| At Time = 235296 => SCOREBOARD PASSED: rdata = x == exp_rdata = 103
+# ||MATCHED|| At Time = 411768 => SCOREBOARD PASSED: rdata = x == exp_rdata = 213
+# ||MIS-MATCHED|| At Time = 529416 => SCOREBOARD FAILED: rdata = 213 != exp_rdata = 199
+# ||MIS-MATCHED|| At Time = 647064 => SCOREBOARD FAILED: rdata = 199 != exp_rdata = 144
+# ||MIS-MATCHED|| At Time = 705888 => SCOREBOARD FAILED: rdata = 199 != exp_rdata = 27
+# ||MIS-MATCHED|| At Time = 823536 => SCOREBOARD FAILED: rdata = 144 != exp_rdata = 214
+# ||MIS-MATCHED|| At Time = 941184 => SCOREBOARD FAILED: rdata = 27 != exp_rdata = 45
+# ||MIS-MATCHED|| At Time = 1000008 => SCOREBOARD FAILED: rdata = 27 != exp_rdata = 236
+# ||MIS-MATCHED|| At Time = 1058832 => SCOREBOARD FAILED: rdata = 214 != exp_rdata = 89
+# ** Note: $finish    : D:/PSU/Winter 2025/Fundamentals of Pre-Silicon Validation/Final Project/Final Project/ece593w25_6_asynchronous_fifo_M2/SIM/../TOP/async_fifo_top.sv(82)
+#    Time: 5117648 ps  Iteration: 0  Instance: /async_fifo_top
+# End time: 15:52:50 on Feb 17,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0

@@ -6,8 +6,8 @@ module async_fifo_top();
 
 	mailbox #(transaction)mon2_sb;
 
-	parameter real WCLK_FRQ = 10.00;					//Unit: MHz
-	parameter real RCLK_FRQ = 6.00;					//Unit: MHz
+	parameter real WCLK_FRQ = 20.00;					//Unit: MHz
+	parameter real RCLK_FRQ = 17.00;					    //Unit: MHz
 	parameter real WCLK_T = ((1/WCLK_FRQ)*1000.00);
 	parameter real RCLK_T = ((1/RCLK_FRQ)*1000.00);
 	parameter DATA_WIDTH=8;
@@ -15,23 +15,23 @@ module async_fifo_top();
 	
 	bit wclk, rclk, wrst_n, rrst_n;
 	
-	async_fifo_base_test test_h;
+	async_fifo_base_test #(DATA_WIDTH, ADDR_WIDTH) test_h;
 	
 	async_fifo_interface inf(.*);
 
 	scoreboard sb_h;
 
     //Design top module instantiation
-	asynch_fifo_dut DUT(.rdata(inf.rdata),
-                        .wfull(inf.wfull),
-                        .rempty(inf.rempty),
-                        .wdata(inf.wdata),
-                        .winc(inf.winc),
-                        .wclk(wclk),
-                        .wrst_n(wrst_n),
-                        .rinc(inf.rinc),
-                        .rclk(rclk),
-                        .rrst_n(rrst_n));
+	asynch_fifo_dut #(DATA_WIDTH, ADDR_WIDTH) DUT(.rdata(inf.rdata),
+                                                  .wfull(inf.wfull),
+                                                  .rempty(inf.rempty),
+                                                  .wdata(inf.wdata),
+                                                  .winc(inf.winc),
+                                                  .wclk(wclk),
+                                                  .wrst_n(wrst_n),
+                                                  .rinc(inf.rinc),
+                                                  .rclk(rclk),
+                                                  .rrst_n(rrst_n));
 
     task reset();
 
@@ -78,7 +78,7 @@ module async_fifo_top();
 	    test_h = new(inf);
 	    test_h.build();
 	    test_h.run();
-	    #10000;
+	    #5000;
 	    $finish;
     end	
 

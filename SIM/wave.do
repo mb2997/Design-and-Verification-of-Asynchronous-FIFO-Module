@@ -40,17 +40,17 @@ add wave -noupdate -group SYNC_W2R /async_fifo_top/DUT/SYNC_W2R/wptr
 add wave -noupdate -group SYNC_W2R /async_fifo_top/DUT/SYNC_W2R/rclk
 add wave -noupdate -group SYNC_W2R /async_fifo_top/DUT/SYNC_W2R/rrst_n
 add wave -noupdate -group SYNC_W2R /async_fifo_top/DUT/SYNC_W2R/rq1_wptr
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/rdata
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/wdata
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/waddr
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/raddr
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/wclken
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/rclken
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/wfull
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/rempty
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/wclk
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/rclk
-add wave -noupdate -group FIFOMEM /async_fifo_top/DUT/FIFOMEM/fifo
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/rdata
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/wdata
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/waddr
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/raddr
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/wclken
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/rclken
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/wfull
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/rempty
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/wclk
+add wave -noupdate -expand -group FIFOMEM -radix unsigned /async_fifo_top/DUT/FIFOMEM/rclk
+add wave -noupdate -expand -group FIFOMEM -radix unsigned -childformat {{{/async_fifo_top/DUT/FIFOMEM/fifo[0]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[1]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[2]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[3]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[4]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[5]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[6]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[7]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[8]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[9]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[10]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[11]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[12]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[13]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[14]} -radix unsigned} {{/async_fifo_top/DUT/FIFOMEM/fifo[15]} -radix unsigned}} -subitemconfig {{/async_fifo_top/DUT/FIFOMEM/fifo[0]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[1]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[2]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[3]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[4]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[5]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[6]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[7]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[8]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[9]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[10]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[11]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[12]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[13]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[14]} {-radix unsigned} {/async_fifo_top/DUT/FIFOMEM/fifo[15]} {-radix unsigned}} /async_fifo_top/DUT/FIFOMEM/fifo
 add wave -noupdate -group RPTR_EMPTY /async_fifo_top/DUT/RPTR_EMPTY/rempty
 add wave -noupdate -group RPTR_EMPTY /async_fifo_top/DUT/RPTR_EMPTY/raddr
 add wave -noupdate -group RPTR_EMPTY /async_fifo_top/DUT/RPTR_EMPTY/rptr
@@ -74,7 +74,7 @@ add wave -noupdate -group WPTR_FULL /async_fifo_top/DUT/WPTR_FULL/wgraynext
 add wave -noupdate -group WPTR_FULL /async_fifo_top/DUT/WPTR_FULL/wbinnext
 add wave -noupdate -group WPTR_FULL /async_fifo_top/DUT/WPTR_FULL/wfull_val
 TreeUpdate [SetDefaultTree]
-WaveRestoreCursors {{Cursor 1} {1110418 ps} 0} {{Cursor 2} {999836104 ps} 0}
+WaveRestoreCursors {{Cursor 1} {1049270 ps} 0} {{Cursor 2} {999836104 ps} 0}
 quietly wave cursor active 1
 configure wave -namecolwidth 267
 configure wave -valuecolwidth 71
@@ -90,4 +90,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {0 ps} {4433962 ps}
+WaveRestoreZoom {0 ps} {2730 ns}
