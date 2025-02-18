@@ -13,21 +13,27 @@ class driver;
 	endfunction
 
 	task run();
-
 		forever
 		begin
 			gen2drv.get(trans_h);
 			send_to_dut();
 		end
-
 	endtask
 
 	task send_to_dut();
 
-		@(negedge vif.wclk);
-		vif.wdata <= trans_h.wdata;
-		vif.winc <= trans_h.winc;
-		vif.rinc <= trans_h.rinc;
+		fork
+			begin
+				@(negedge vif.wclk);
+				vif.wdata <= trans_h.wdata;
+				vif.winc <= trans_h.winc;
+			end
+			
+			begin
+				@(negedge vif.rclk);
+				vif.rinc <= trans_h.rinc;
+			end
+		join_any
 
 	endtask
 
