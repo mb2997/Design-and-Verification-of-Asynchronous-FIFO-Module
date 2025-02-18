@@ -7,6 +7,8 @@ class async_fifo_base_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
     async_fifo_write_full_test #(DATA_WIDTH, ADDR_WIDTH) async_fifo_write_full_test_h;
     async_fifo_read_empty_test #(DATA_WIDTH, ADDR_WIDTH) async_fifo_read_empty_test_h;
     async_fifo_b2b_write_read_test #(DATA_WIDTH, ADDR_WIDTH) async_fifo_b2b_write_read_test_h;
+    async_fifo_read_at_empty_test #(DATA_WIDTH, ADDR_WIDTH) async_fifo_read_at_empty_test_h;
+    async_fifo_write_at_full_test #(DATA_WIDTH, ADDR_WIDTH) async_fifo_write_at_full_test_h;
 
     //Interface instantiation
     virtual async_fifo_interface vif;
@@ -56,6 +58,24 @@ class async_fifo_base_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
             $display("*************************************************************************");
 			async_fifo_b2b_write_read_test_h = new(env_h.gen2drv);
 		    env_h.gen_h = async_fifo_b2b_write_read_test_h;
+		end
+
+		if($test$plusargs("ASYNC_FIFO_READ_AT_EMPTY_TEST"))
+		begin
+            $display("*************************************************************************");
+            $display("\tASYNC_FIFO_READ_AT_EMPTY_TEST is Running");
+            $display("*************************************************************************");
+			async_fifo_read_at_empty_test_h = new(env_h.gen2drv);
+		    env_h.gen_h = async_fifo_read_at_empty_test_h;
+		end
+		
+        if($test$plusargs("ASYNC_FIFO_WRITE_AT_EMPTY_TEST"))
+		begin
+            $display("*************************************************************************");
+            $display("\tASYNC_FIFO_READ_AT_EMPTY_TEST is Running");
+            $display("*************************************************************************");
+			async_fifo_write_at_full_test_h = new(env_h.gen2drv);
+		    env_h.gen_h = async_fifo_write_at_full_test_h;
 		end
 
         env_h.run();

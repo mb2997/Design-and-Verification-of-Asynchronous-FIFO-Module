@@ -13,7 +13,7 @@ class async_fifo_b2b_write_read_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) ext
 		random_depth = $urandom_range(1, FIFO_DEPTH);
 
         //Write Operation
-        repeat(1)
+        repeat(random_depth)
 		begin
 			trans_h = new();
 			assert(trans_h.randomize() with {winc == 1 && rinc == 0;}) 
