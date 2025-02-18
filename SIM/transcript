@@ -1,6 +1,6 @@
-# vsim -vopt async_fifo_top -c -do "run -all; exit" "+ASYNC_FIFO_WRITE_AT_FULL_TEST" 
-# Start time: 18:21:12 on Feb 17,2025
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# vsim -vopt async_fifo_top -c -do "run -all; exit" "+ASYNC_FIFO_WRITE_FULL_TEST" 
+# Start time: 01:53:13 on Feb 18,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
 # //  Questa Sim-64
 # //  Version 10.7c win64 Aug 18 2018
 # //
@@ -22,13 +22,37 @@
 # Loading work.async_fifo_top(fast)
 # Loading work.async_fifo_interface(fast)
 # Loading work.asynch_fifo_dut(fast)
+# Loading work.sync_r2w(fast)
+# Loading work.sync_w2r(fast)
+# Loading work.fifomem(fast)
+# Loading work.rptr_empty(fast)
+# Loading work.wptr_full(fast)
 # run -all
 # WCLK_T/2 = 50.00
 # RCLK_T/2 = 58.82
+# *************************************************************************
+# 	ASYNC_FIFO_WRITE_FULL_TEST is Running
+# *************************************************************************
+# async_fifo_write_full_test, Inputs: wdata = 152, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 103, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 191, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 213, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 198, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 199, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 62, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 144, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 3, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 27, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 111, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 214, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 252, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 45, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 87, rdata = x, winc = 1, rinc = 0
+# async_fifo_write_full_test, Inputs: wdata = 236, rdata = x, winc = 1, rinc = 0
 # ---------------------------------------------------------------
 #               950000 -- ERROR : FIFO FULL --> We can't write
 # ---------------------------------------------------------------
-# ** Note: $finish    : ../TOP/async_fifo_top.sv(82)
+# ** Note: $finish    : ../TOP/async_fifo_top.sv(95)
 #    Time: 5117648 ps  Iteration: 0  Instance: /async_fifo_top
-# End time: 18:21:13 on Feb 17,2025, Elapsed time: 0:00:01
+# End time: 01:53:14 on Feb 18,2025, Elapsed time: 0:00:01
 # Errors: 0, Warnings: 0

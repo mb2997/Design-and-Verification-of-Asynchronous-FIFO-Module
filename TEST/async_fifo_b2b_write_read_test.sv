@@ -2,11 +2,11 @@ class async_fifo_b2b_write_read_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) ext
 
 	localparam FIFO_DEPTH = 1 << ADDR_WIDTH;
 
-	bit [FIFO_DEPTH-1:0] random_depth;
-
-    function new(mailbox #(transaction)gen2drv);
+	function new(mailbox #(transaction)gen2drv);
 		super.new(gen2drv);
     endfunction
+
+	bit [FIFO_DEPTH-1:0] random_depth;
 
     task run();
 

@@ -2,6 +2,7 @@ class generator #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 
 	transaction trans_h;
 	mailbox #(transaction) gen2drv;
+	virtual async_fifo_interface vif;
 
 	function new(mailbox #(transaction) gen2drv);
 		this.gen2drv = gen2drv;

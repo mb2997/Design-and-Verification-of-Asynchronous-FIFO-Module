@@ -19,10 +19,21 @@ class scoreboard #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 		WDATA	:	coverpoint trans_h.wdata
 					{
 						bins LOW	=	{0};
-						bins MIN	= 	{[1:(2**DATA_WIDTH)/4]};
-						bins MID 	= 	{[(((2**DATA_WIDTH)/4)+1):(2**DATA_WIDTH)/2]};
-						bins HIGH 	= 	{[(((2**DATA_WIDTH)/2)+1):(2**DATA_WIDTH)-2]};
-						bins MAX 	= 	{(2**DATA_WIDTH)-1};
+						bins MED 	= 	{[1:(2**DATA_WIDTH)-2]};
+						bins HIGH 	= 	{(2**DATA_WIDTH)-1};
+					}
+
+	endgroup
+
+	covergroup cg_fifo_read @(vif.rclk);
+		
+		RRST_N	:	coverpoint vif.rrst_n;
+
+		RDATA	:	coverpoint trans_h.rdata
+					{
+						bins LOW	=	{0};
+						bins MED 	= 	{[1:(2**DATA_WIDTH)-2]};
+						bins HIGH 	= 	{(2**DATA_WIDTH)-1};
 					}
 
 	endgroup

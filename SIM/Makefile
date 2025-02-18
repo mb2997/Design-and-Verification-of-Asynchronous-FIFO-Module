@@ -31,6 +31,9 @@ sim5 :
 sim6 :
 	vsim -vopt $(TBModule) -c -do "run -all; exit" +ASYNC_FIFO_WRITE_AT_FULL_TEST
 
+sim7 :
+	vsim -vopt $(TBModule) -c -do "run -all; exit" +ASYNC_FIFO_RESET_TEST
+
 all : lib cmp sim
 
 tc1 : lib cmp sim1
@@ -44,3 +47,5 @@ tc4 : lib cmp sim4
 tc5 : lib cmp sim5
 
 tc6 : lib cmp sim6
+
+tc7 : lib cmp sim7

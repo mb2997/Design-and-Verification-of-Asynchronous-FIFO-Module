@@ -26,6 +26,8 @@ module fifomem #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) (output logic [DATA_WIDTH
         begin
             rdata <= fifo[raddr];
         end
+        else
+            rdata <= 0;
     end
 
 endmodule

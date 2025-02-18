@@ -18,6 +18,7 @@ package async_fifo_pkg;
 	`include "async_fifo_b2b_write_read_test.sv"
 	`include "async_fifo_read_at_empty_test.sv"
 	`include "async_fifo_write_at_full_test.sv"
+	`include "async_fifo_reset_test.sv"
 	`include "async_fifo_base_test.sv"
 
 endpackage

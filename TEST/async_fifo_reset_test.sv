@@ -1,4 +1,4 @@
-class async_fifo_read_at_empty_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends generator;
+class async_fifo_reset_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends generator;
 
 	localparam FIFO_DEPTH = 1 << ADDR_WIDTH;
 
@@ -9,7 +9,7 @@ class async_fifo_read_at_empty_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) exte
     task run();
 
         //Write Operation
-        repeat(FIFO_DEPTH-(FIFO_DEPTH/2))
+        repeat(FIFO_DEPTH)
 		begin
 			trans_h = new();
 			assert(trans_h.randomize() with {winc == 1 && rinc == 0;}) 
@@ -17,8 +17,24 @@ class async_fifo_read_at_empty_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) exte
     			$fatal("trans_h.randomize() FAILED, Randomization Failed");
 
 			gen2drv.put(trans_h);
-			trans_h.print("async_fifo_read_at_empty_test");
+			trans_h.print("async_fifo_write_read_test");
 		end
+
+		// vif.wrst_n = 0;
+		// vif.rrst_n = 0;
+
+		// fork
+		// 	@(negedge vif.wclk);
+		// 	@(negedge vif.rclk);
+		// join
+					
+		// fork
+		// 	@(negedge vif.wclk);
+		// 	@(negedge vif.rclk);
+		// join
+
+		// vif.wrst_n = 1;
+		// vif.rrst_n = 1;
 
         //Read Operation
         repeat(FIFO_DEPTH)
@@ -29,7 +45,7 @@ class async_fifo_read_at_empty_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) exte
     			$fatal("trans_h.randomize() FAILED, Randomization Failed");
 
 			gen2drv.put(trans_h);
-			trans_h.print("async_fifo_read_at_empty_test");
+			trans_h.print("async_fifo_write_read_test");
 		end
 
     endtask

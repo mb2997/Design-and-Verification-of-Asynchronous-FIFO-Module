@@ -2,7 +2,7 @@ class async_fifo_write_at_full_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) exte
 
 	localparam FIFO_DEPTH = 1 << ADDR_WIDTH;
 
-    function new(mailbox #(transaction)gen2drv);
+	function new(mailbox #(transaction)gen2drv);
 		super.new(gen2drv);
     endfunction
 
