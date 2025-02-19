@@ -81,8 +81,9 @@ module async_fifo_top();
             fork
                 test_h.run();
             join_none
-            #500;
+            #700;
             reset();
+            #700;
             $display("*************************************************************************");
             $display("\tRESET Applied");
             $display("*************************************************************************");
@@ -93,13 +94,6 @@ module async_fifo_top();
         end
 	    #5000;
 	    $finish;
-    end	
-
-    final
-    begin
-    // $display("-------------------------------------------------------");
-    // $display("Time : %0t,  FIFO-Coverage = %0.2f %%",$time,fifo_sb_h.fifo_cvg.get_coverage());
-    // $display("-------------------------------------------------------");
     end	
 
     //Assertions
@@ -133,7 +127,7 @@ module async_fifo_top();
 
     property p_fifoflags_wfull;
 		@(posedge wclk)
-		inf.rinc |=> !inf.wfull;
+		inf.rinc |-> ##[3:5] !inf.wfull;
 	endproperty
 	assert property(p_fifoflags_wfull) else $error("After a FIFO read, FIFO cannot be full");
 
