@@ -21,6 +21,7 @@ class monitor;
 		forever
 		begin
 			data_from_dut();
+			trans_h.print("Interface to Monitor: ");
 		end
 
 	endtask

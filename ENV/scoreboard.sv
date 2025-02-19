@@ -12,29 +12,43 @@ class scoreboard #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 	int fifo_count;
 	logic full,empty;
 
-	covergroup cg_fifo_write @(vif.wclk);
+	covergroup cg_fifo_write;
 		
-		WRST_N	:	coverpoint vif.wrst_n;
-
-		WDATA	:	coverpoint trans_h.wdata
+		WDATA	:	coverpoint vif.wdata
 					{
 						bins LOW	=	{0};
 						bins MED 	= 	{[1:(2**DATA_WIDTH)-2]};
-						bins HIGH 	= 	{(2**DATA_WIDTH)-1};
+						bins HIGH 	= 	{2**DATA_WIDTH-1};
 					}
+
+	    WFULL	:	coverpoint vif.wfull;
+
+		WINC	: 	coverpoint vif.winc; 
+
+		WINCxWDATA	: cross WINC, WDATA
+					  {
+						ignore_bins IBINS = binsof(WINC) intersect {0};
+					  }
 
 	endgroup
 
-	covergroup cg_fifo_read @(vif.rclk);
+	covergroup cg_fifo_read;
 		
-		RRST_N	:	coverpoint vif.rrst_n;
-
-		RDATA	:	coverpoint trans_h.rdata
+		RDATA	:	coverpoint vif.rdata
 					{
 						bins LOW	=	{0};
 						bins MED 	= 	{[1:(2**DATA_WIDTH)-2]};
-						bins HIGH 	= 	{(2**DATA_WIDTH)-1};
+						bins HIGH 	= 	{2**DATA_WIDTH-1};
 					}
+		
+		REMPTY	:	coverpoint vif.rempty;
+
+		RINC	: 	coverpoint vif.rinc; 
+
+		RINCxRDATA	: cross RINC, RDATA
+					  {
+						ignore_bins IBINS = binsof(RINC) intersect {0};
+		  			  }
 
 	endgroup
 
@@ -50,14 +64,39 @@ class scoreboard #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 		full = 0;
 		empty = 0;
 		cg_fifo_write = new();
+		cg_fifo_read = new();
 	endfunction
 
+	task sample_method_for_write();
+		forever
+		begin
+			@(posedge vif.wclk);
+			cg_fifo_write.sample();
+		end
+	endtask
+
+	task sample_method_for_read();
+		forever
+		begin
+			@(posedge vif.rclk);
+			cg_fifo_read.sample();
+		end
+	endtask
+
 	task run();
-		transaction trans_h;
 		fork
-			get_data_from_wmon();
-			get_data_from_rmon();
-		join
+			sample_method_for_write();
+			sample_method_for_read();
+		join_none
+		
+		if(sb_enable) begin
+		begin
+			fork
+				get_data_from_wmon();
+				get_data_from_rmon();
+			join
+		end
+	end
 	endtask
 
 	task get_data_from_wmon();
@@ -98,11 +137,15 @@ class scoreboard #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 					exp_rdata = mem_model[rd_ptr];
 					if(exp_rdata != trans_h.rdata)
 					begin
+						$display("------------------------------------------------------------------------------------------------------");
 						$display("||MIS-MATCHED|| At Time = %0t => SCOREBOARD FAILED: rdata = %0d != exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
+						$display("------------------------------------------------------------------------------------------------------");
 					end
 					else
 					begin
+						$display("------------------------------------------------------------------------------------------------------");
 						$display("||MATCHED|| At Time = %0t => SCOREBOARD PASSED: rdata = %0d == exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
+						$display("------------------------------------------------------------------------------------------------------");
 					end
  					rd_ptr++;
 				end

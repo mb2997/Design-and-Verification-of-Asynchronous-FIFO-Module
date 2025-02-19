@@ -18,6 +18,7 @@ class generator #(parameter DATA_WIDTH=8, ADDR_WIDTH=4);
 			$fatal("trans_h.randomize() FAILED, Randomization Failed");
 			
 			gen2drv.put(trans_h);
+			trans_h.print("Generator: ");
 		end
 
 	endtask

@@ -16,6 +16,7 @@ class driver;
 		forever
 		begin
 			gen2drv.get(trans_h);
+			trans_h.print("Driver to Interface: ");
 			send_to_dut();
 		end
 	endtask
