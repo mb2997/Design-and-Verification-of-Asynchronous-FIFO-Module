@@ -1,41 +1,43 @@
-class driver;
-
-	virtual async_fifo_interface vif;
-	mailbox #(transaction) gen2drv;
-	transaction trans_h;
-
-	function new(virtual async_fifo_interface vif,
-				 mailbox #(transaction) gen2drv);
-
-		this.vif = vif;
-		this.gen2drv = gen2drv;
-
+class driver extends uvm_driver #(seq_item);
+	`uvm_component_utils(driver);
+	
+	function new(string name,uvm_component parent);
+		super.new(name,parent);
 	endfunction
-
-	task run();
-		forever
-		begin
-			gen2drv.get(trans_h);
-			trans_h.print("Driver to Interface: ");
-			send_to_dut();
-		end
+	
+	virtual async_fifo_interface vif;
+	
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		if(!(uvm_config_db#(virtual async_fifo_interface)::get(this,"*","vif",vif)))
+			`uvm_error("async_fifo","Failed to get vif from config DB!");
+	endfunction
+	
+	task run_phase(uvm_phase phase);
+		seq_item item;
+		super.run_phase(phase);
+		
+		forever begin
+			`uvm_info("Data from Sequencer",UVM_HIGH);
+			seq_item_port.get_next_item(item);
+			drive_item(item);
+			seq_item_port.item_done();
+		end	
 	endtask
-
-	task send_to_dut();
-
+	
+	task drive_item(seq_item item);
 		fork
 			begin
 				@(negedge vif.wclk);
-				vif.wdata <= trans_h.wdata;
-				vif.winc <= trans_h.winc;
+				vif.wdata <= item.wdata;
+				vif.winc <= item.winc;
 			end
 			
 			begin
 				@(negedge vif.rclk);
-				vif.rinc <= trans_h.rinc;
+				vif.rinc <= item.rinc;
 			end
 		join_any
-
 	endtask
-
+	
 endclass

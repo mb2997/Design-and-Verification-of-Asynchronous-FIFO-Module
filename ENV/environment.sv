@@ -16,7 +16,7 @@ class environment extends uvm_env;
 	
 	function void connect_phase(uvm_phase phase);
 		super.connect_phase(phase);
-		agent_h.monitor_h.trans_port.connect(scoreboard_h.analysis_export);
+		agent_h.monitor_h.monitor_ap.connect(scoreboard_h.monitor_analysis_imp);
 	endfunction
 	
 endclass
