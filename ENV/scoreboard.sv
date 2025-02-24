@@ -6,7 +6,10 @@ class scoreboard extends uvm_scoreboard;
 	endfunction
 	
 	uvm_analysis_imp #(seq_item,scoreboard) monitor_analysis_imp;
+	
 	virtual async_fifo_interface vif;
+	
+	uvm_tlm_analysis_fifo #(seq_item) analysis_fifo;
 	
 	parameter MEMDEPTH = 1<<ADDR_WIDTH;
 	logic [DATA_WIDTH-1:0] mem_model [int];
@@ -18,19 +21,27 @@ class scoreboard extends uvm_scoreboard;
 	function void build_phase(uvm_phase phase);
 		super.build_phase(phase);
 		monitor_analysis_imp = new("monitor_analysis_imp",this);
+		analysis_fifo = new("analysis_fifo",this);
 		if(!(uvm_config_db#(virtual async_fifo_interface)::get(this,"*","vif",vif)))
 			`uvm_error("async_fifo","Failed to get vif from config DB!");
 	endfunction
 	
-	function write(seq_item item);
+	function void write (seq_item item);
+		analysis_fifo.write(item);
+	endfunction
+	
+	task run_phase(uvm_phase phase);
+		super.run_phase(phase);
+		seq_item item;
 		if(sb_enable) begin
 		begin
+			analysis_fifo.get(item)
 			fork
 				get_data_from_wmon(item);
 				get_data_from_rmon(item);
 			join
 		end
-	endfunction
+	endtask
 	
 	task get_data_from_wmon(seq_item item);
 		forever

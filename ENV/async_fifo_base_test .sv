@@ -18,10 +18,10 @@ class async_fifo_base_test extends uvm_test;
 		seq_item_h = gen_seq_item::type_id::create("seq_item_h");
 	endfunction
 	
-	function void run_phase(uvm_phase phase);
+	task run_phase(uvm_phase phase);
 		phase.raise_objection(this);
 		//tests
 		phase.drop_objection(this);	
-	endfunction
+	endtask
 	
 endclass
