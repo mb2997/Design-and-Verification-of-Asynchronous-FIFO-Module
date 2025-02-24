@@ -1,36 +1,22 @@
-class environment;
-
-	generator gen_h;
-	driver drv_h;
-	monitor mon_h;
-	scoreboard sb_h;
-
-	mailbox #(transaction) gen2drv;
-	mailbox #(transaction) wmon2sb;
-	mailbox #(transaction) rmon2sb;
-	virtual async_fifo_interface vif;
-
-	function new(virtual async_fifo_interface vif);
-		gen2drv = new();
-		wmon2sb = new();
-		rmon2sb = new();
-		this.vif = vif;
+class environment extends uvm_env;
+	`uvm_component_utils(environment);
+	
+	agent agent_h;
+	scoreboard scoreboard_h;
+	
+	function new(string name,uvm_component parent);
+		super.new(name,parent);
 	endfunction
-
-	function void build();
-		gen_h = new(gen2drv);
-		drv_h = new(vif, gen2drv);
-		mon_h = new(vif, wmon2sb, rmon2sb);
-		sb_h = new(vif, wmon2sb, rmon2sb);
+	
+	function void build_phase(uvm_phase phase);
+		super.build_phase(phase);
+		agent_h = agent::type_id::create("agent_h",this);
+		scoreboard_h = scoreboard::type_id::create("scoreboard_h",this);
 	endfunction
-
-	task run();
-		fork
-			gen_h.run();
-			drv_h.run();
-			mon_h.run();
-			sb_h.run();
-		join_any
-	endtask
-
+	
+	function void connect_phase(uvm_phase phase);
+		super.connect_phase(phase);
+		agent_h.monitor_h.trans_port.connect(scoreboard_h.analysis_export);
+	endfunction
+	
 endclass
