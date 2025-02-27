@@ -2,7 +2,7 @@ class async_fifo_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_test;
 
     bit clk;
     //Factory registration
-    `uvm_component_utils(async_fifo_test)
+    `uvm_component_param_utils(async_fifo_test)
 
     async_fifo_env env_h;
     async_fifo_seqs seqs_h;
