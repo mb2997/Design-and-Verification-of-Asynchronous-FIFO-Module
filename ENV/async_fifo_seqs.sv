@@ -2,6 +2,8 @@ class async_fifo_seqs #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_sequen
 
     `uvm_object_utils(async_fifo_seqs)
 
+    parameter DEPTH = 1 << ADDR_WIDTH;
+
     async_fifo_trans #(DATA_WIDTH) trans_h;
 
     function new(string name = "async_fifo_base_seqs");

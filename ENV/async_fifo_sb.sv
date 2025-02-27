@@ -127,7 +127,7 @@ class async_fifo_sb #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_scoreboa
 		forever
 		begin
 			trans_h = new();
-			@(negedge vif.wclk);
+			//@(negedge vif.wclk);
 			wmon2sb_af.get(trans_h);
 			if(trans_h.winc)
 			begin
