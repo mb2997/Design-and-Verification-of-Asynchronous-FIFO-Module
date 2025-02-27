@@ -7,7 +7,7 @@ module async_fifo_top();
 
     parameter CYCLE = 10;
     parameter real WCLK_FRQ = 20.00; // Unit: MHz
-    parameter real RCLK_FRQ = 17.00; // Unit: MHz
+    parameter real RCLK_FRQ = 20.00; // Unit: MHz
     parameter real WCLK_T = ((1 / WCLK_FRQ) * 1000.00);
     parameter real RCLK_T = ((1 / RCLK_FRQ) * 1000.00);
     parameter DATA_WIDTH = 8;
@@ -40,6 +40,10 @@ module async_fifo_top();
             @(negedge wclk);
             @(negedge rclk);
         join
+        fork
+            @(negedge wclk);
+            @(negedge rclk);
+        join
         wrst_n = 1;
         rrst_n = 1;
                     
@@ -65,8 +69,23 @@ module async_fifo_top();
         fork
             reset();
         join_none
+
         uvm_config_db#(virtual async_fifo_if) :: set(null, "*", "vif", inf);
-        run_test("async_fifo_test");
+        
+        if($test$plusargs("MID_RESET"))
+		begin
+            fork
+                run_test("async_fifo_full_test");
+            join_none
+            repeat(6)
+                @(negedge wclk);
+            reset();
+            $display("*************************************************************************");
+            $display($time, "\tRESET Applied");
+            $display("*************************************************************************");
+		end
+        else
+            run_test();
     end
 
     // Assertions
