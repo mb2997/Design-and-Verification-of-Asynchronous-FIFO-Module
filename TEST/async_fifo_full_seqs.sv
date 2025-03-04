@@ -8,7 +8,10 @@ class async_fifo_full_seqs #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends async
 
     task body();
         trans_h = async_fifo_trans #(DATA_WIDTH) :: type_id :: create("trans_h");
-        repeat(DEPTH+2)
+        fork
+            check_fifo_full();
+        join_none
+        do
         begin
             assert(trans_h.randomize() with {winc == 1; rinc == 0;});
 
@@ -18,6 +21,7 @@ class async_fifo_full_seqs #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends async
             //finish_item give response to driver component for packet generation completion
             finish_item(trans_h);
         end
+        while(!fifo_became_full);
     endtask
 
 endclass : async_fifo_full_seqs

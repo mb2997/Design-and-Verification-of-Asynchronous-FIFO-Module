@@ -10,6 +10,7 @@ class async_fifo_write_at_full_test extends async_fifo_test;
     endfunction
 
     task run_phase(uvm_phase phase);
+        void'(uvm_hdl_force("async_fifo_top.disable_write_at_full",1));
         phase.raise_objection(this);
         begin
             seqs_h_tc4 = async_fifo_write_at_full_seqs #(DATA_WIDTH, ADDR_WIDTH) :: type_id :: create("seqs_h_tc4", this);

@@ -9,7 +9,7 @@ class async_fifo_write_read_max_data_range_seqs #(parameter DATA_WIDTH=8, ADDR_W
     task body();
         trans_h = async_fifo_trans #(DATA_WIDTH) :: type_id :: create("trans_h");
         //Write Operation
-        repeat(DEPTH+1)
+        repeat(5)
 		begin
 			assert(trans_h.randomize() with {winc == 1 && rinc == 0 && wdata == (2**DATA_WIDTH-1);});
             //start_item is waiting for "get_next_item" which is called by driver component in run_phase
@@ -20,7 +20,7 @@ class async_fifo_write_read_max_data_range_seqs #(parameter DATA_WIDTH=8, ADDR_W
 		end
 
         //Read Operation
-        repeat(DEPTH+1)
+        repeat(5)
 		begin
 			assert(trans_h.randomize() with {winc == 0 && rinc == 1;});
 

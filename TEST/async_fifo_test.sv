@@ -29,6 +29,7 @@ class async_fifo_test #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_test;
 
     function void end_of_elaboration_phase(uvm_phase phase);
         uvm_top.print_topology();
+        get_vif_in_pkg();
     endfunction
 
     task run_phase(uvm_phase phase);
