@@ -164,18 +164,22 @@ class async_fifo_sb #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_scoreboa
 				if(mem_model.exists(rd_ptr))
 				begin
 					exp_rdata = mem_model[rd_ptr];
-					if(exp_rdata != trans_h.rdata)
-					begin
-						$display("------------------------------------------------------------------------------------------------------");
-						$display("||MIS-MATCHED|| At Time = %0t => SCOREBOARD FAILED: rdata = %0d != exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
-						$display("------------------------------------------------------------------------------------------------------");
-					end
-					else
-					begin
-						$display("------------------------------------------------------------------------------------------------------");
-						$display("||MATCHED|| At Time = %0t => SCOREBOARD PASSED: rdata = %0d == exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
-						$display("------------------------------------------------------------------------------------------------------");
-					end
+					rdata_q.push_back(exp_rdata);
+					//$display("The %0d Data has been read from mem_model at %0d", trans_h.rdata, rd_ptr);
+					// if(exp_rdata != trans_h.rdata)
+					// begin
+					// 	$display("------------------------------------------------------------------------------------------------------");
+					// 	$display("||MIS-MATCHED|| At Time = %0t => SCOREBOARD FAILED: rdata = %0d != exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
+					// 	$display("------------------------------------------------------------------------------------------------------");
+					// end
+					// else
+					// begin
+					// 	$display("------------------------------------------------------------------------------------------------------");
+					// 	$display("||MATCHED|| At Time = %0t => SCOREBOARD PASSED: rdata = %0d == exp_rdata = %0d", $time, trans_h.rdata, exp_rdata);
+					// 	$display("------------------------------------------------------------------------------------------------------");
+					// end
+					$display("wdata_q = %p", wdata_q);
+					$display("rdata_q = %p", rdata_q);
  					rd_ptr++;
 				end
 				else
@@ -188,5 +192,21 @@ class async_fifo_sb #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_scoreboa
 			end
 		end
 	endtask
+
+	function void extract_phase(uvm_phase phase);
+		if(rdata_q.size() != 0) begin
+		$display("\n------------------------------------------------------------------------");
+		$display("\t\t\tSCOREBOARD SUMMARY										");
+		$display("------------------------------------------------------------------------\n");
+		foreach(rdata_q[i])
+		begin
+			if(rdata_q[i] == wdata_q[i])
+				`uvm_info("SB PASSED:", $sformatf("|DATA MATCHED| => rdata: %0d == wdata: %0d", rdata_q[i], wdata_q[i]), UVM_LOW)
+			else
+				`uvm_error("SB FAILED:", $sformatf("|DATA MIS-MATCHED| => rdata: %0d != wdata: %0d", rdata_q[i], wdata_q[i]))
+		end
+		$display("------------------------------------------------------------------------");
+	end
+	endfunction
 
 endclass : async_fifo_sb

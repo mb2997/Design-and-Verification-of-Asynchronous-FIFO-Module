@@ -34,7 +34,7 @@ class async_fifo_drv #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) extends uvm_driver 
 				@(negedge vif.rclk);
 				vif.rinc <= req.rinc;
 			end
-		join_any
+		join
 
     endtask
     
