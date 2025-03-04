@@ -1,6 +1,6 @@
-# vsim -vopt -coverage async_fifo_top_tb -c -do "run -all; exit" 
-# Start time: 16:08:34 on Jan 30,2025
-# ** Note: (vsim-3812) Design is being optimized...
+# vsim -coverage -vopt async_fifo_top -c -do "coverage save -onexit tc9.ucdb; run -all; exit" "+READ_FAST" "+UVM_TESTNAME=async_fifo_read_faster_than_write_test" 
+# Start time: 22:20:25 on Mar 03,2025
+# ** Note: (vsim-8009) Loading existing optimized design _opt1
 # //  Questa Sim-64
 # //  Version 10.7c win64 Aug 18 2018
 # //
@@ -16,17 +16,629 @@
 # //  18 U.S.C. Section 1905.
 # //
 # Loading sv_std.std
-# Loading work.async_fifo_top_tb(fast)
+# Loading work.async_fifo_if(fast)
+# Loading mtiUvm.uvm_pkg
+# Loading work.async_fifo_pkg(fast)
+# Loading work.async_fifo_top_sv_unit(fast)
+# Loading work.async_fifo_top(fast)
+# Loading work.async_fifo_if(fast)
 # Loading work.asynch_fifo_dut(fast)
 # Loading work.sync_r2w(fast)
 # Loading work.sync_w2r(fast)
 # Loading work.fifomem(fast)
 # Loading work.rptr_empty(fast)
 # Loading work.wptr_full(fast)
-# run -all
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading C:/questasim64_10.7c/uvm-1.1d\win64\uvm_dpi.dll
+# coverage save -onexit tc9.ucdb
+#  run -all
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(216) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
 # WCLK_T/2 = 10.00
-# RCLK_T/2 = 16.67
-# ** Note: $finish    : ../TB/async_fifo_top_tb.sv(109)
-#    Time: 449982 ps  Iteration: 1  Instance: /async_fifo_top_tb
-# End time: 16:08:35 on Jan 30,2025, Elapsed time: 0:00:01
+# RCLK_T/2 = 12.50
+# UVM_INFO @ 0: reporter [RNTST] Running test async_fifo_read_faster_than_write_test...
+# UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
+# ------------------------------------------------------------------------------
+# Name                       Type                                    Size  Value
+# ------------------------------------------------------------------------------
+# uvm_test_top               async_fifo_read_faster_than_write_test  -     @471 
+#   async_fifo_env           async_fifo_env                          -     @482 
+#     agent_h                async_fifo_agent                        -     @490 
+#       drv_h                async_fifo_drv                          -     @623 
+#         rsp_port           uvm_analysis_port                       -     @638 
+#         seq_item_port      uvm_seq_item_pull_port                  -     @630 
+#       mon_h                async_fifo_mon                          -     @600 
+#         rmon2sb            uvm_analysis_port                       -     @615 
+#         wmon2sb            uvm_analysis_port                       -     @607 
+#       seqr_h               async_fifo_seqr                         -     @646 
+#         rsp_export         uvm_analysis_export                     -     @653 
+#         seq_item_export    uvm_seq_item_pull_imp                   -     @747 
+#         arbitration_queue  array                                   0     -    
+#         lock_queue         array                                   0     -    
+#         num_last_reqs      integral                                32    'd1  
+#         num_last_rsps      integral                                32    'd1  
+#     sb_h                   async_fifo_sb                           -     @497 
+#       rmon2sb_af           uvm_tlm_analysis_fifo #(T)              -     @551 
+#         analysis_export    uvm_analysis_imp                        -     @590 
+#         get_ap             uvm_analysis_port                       -     @582 
+#         get_peek_export    uvm_get_peek_imp                        -     @566 
+#         put_ap             uvm_analysis_port                       -     @574 
+#         put_export         uvm_put_imp                             -     @558 
+#       wmon2sb_af           uvm_tlm_analysis_fifo #(T)              -     @504 
+#         analysis_export    uvm_analysis_imp                        -     @543 
+#         get_ap             uvm_analysis_port                       -     @535 
+#         get_peek_export    uvm_get_peek_imp                        -     @519 
+#         put_ap             uvm_analysis_port                       -     @527 
+#         put_export         uvm_put_imp                             -     @511 
+# ------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 0: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     161                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    0                                                    
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 12: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @777 
+#   wdata   integral          8     'dX  
+#   winc    integral          1     'dX  
+#   rinc    integral          1     'dX  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     1    
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 12: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd21                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    12                                                   
+#   end_time                     time              64    12                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../TOP/async_fifo_top.sv(57) @ 24: reporter [RESET_DONE] RESET task executed
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 24: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @813 
+#   wdata   integral          8     161  
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     1    
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 24: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     236                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    24                                                   
+#   end_time                     time              64    24                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 36: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @826 
+#   wdata   integral          8     'd21 
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     1    
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 36: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd80                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    36                                                   
+#   end_time                     time              64    36                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 48: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @838 
+#   wdata   integral          8     'd80 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     1    
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80}
+# rdata_q = '{21}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 48: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd43                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    48                                                   
+#   end_time                     time              64    48                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 60: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @850 
+#   wdata   integral          8     'd43 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43}
+# rdata_q = '{21, 80}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 60: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     162                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    60                                                   
+#   end_time                     time              64    60                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 72: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @862 
+#   wdata   integral          8     'd43 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd21 
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43}
+# rdata_q = '{21, 80, 43}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 72: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd22                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    72                                                   
+#   end_time                     time              64    72                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 84: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @874 
+#   wdata   integral          8     162  
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     236  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162}
+# rdata_q = '{21, 80, 43, 43}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 84: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     233                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    84                                                   
+#   end_time                     time              64    84                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 96: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @886 
+#   wdata   integral          8     'd22 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd80 
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162, 22}
+# rdata_q = '{21, 80, 43, 43, 162}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 96: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd93                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    96                                                   
+#   end_time                     time              64    96                                                   
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 108: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @898 
+#   wdata   integral          8     'd93 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd43 
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162, 22, 93}
+# rdata_q = '{21, 80, 43, 43, 162, 22}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 108: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     212                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    108                                                  
+#   end_time                     time              64    108                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 120: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @910 
+#   wdata   integral          8     212  
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd43 
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162, 22, 93, 212}
+# rdata_q = '{21, 80, 43, 43, 162, 22, 93}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 120: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     175                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    120                                                  
+#   end_time                     time              64    120                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 132: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @922 
+#   wdata   integral          8     212  
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     162  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162, 22, 93, 212, 212}
+# rdata_q = '{21, 80, 43, 43, 162, 22, 93, 212}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 132: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd19                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    132                                                  
+#   end_time                     time              64    132                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 144: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @934 
+#   wdata   integral          8     175  
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 144: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     234                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     1                                                    
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    144                                                  
+#   end_time                     time              64    144                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 156: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @946 
+#   wdata   integral          8     'd19 
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 156: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     'd94                                                 
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    156                                                  
+#   end_time                     time              64    156                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 168: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @958 
+#   wdata   integral          8     'd94 
+#   winc    integral          1     1    
+#   rinc    integral          1     1    
+#   rdata   integral          8     'd22 
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# wdata_q = '{21, 80, 43, 43, 162, 22, 93, 212, 212, 175, 19, 94}
+# rdata_q = '{21, 80, 43, 43, 162, 22, 93, 212, 212}
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 168: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     209                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    168                                                  
+#   end_time                     time              64    168                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 180: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @970 
+#   wdata   integral          8     209  
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_drv.sv(18) @ 180: uvm_test_top.async_fifo_env.agent_h.drv_h [async_fifo_drv : ] Packet Received at DRV is ------------------------------------------------------------------------------------------------------------
+# Name                           Type              Size  Value                                                
+# ------------------------------------------------------------------------------------------------------------
+# trans_h                        async_fifo_trans  -     @781                                                 
+#   wdata                        integral          8     168                                                  
+#   winc                         integral          1     1                                                    
+#   rinc                         integral          1     'd0                                                  
+#   rdata                        integral          8     'dX                                                  
+#   rempty                       integral          1     'dX                                                  
+#   wfull                        integral          1     'dX                                                  
+#   begin_time                   time              64    180                                                  
+#   end_time                     time              64    180                                                  
+#   depth                        int               32    'd2                                                  
+#   parent sequence (name)       string            10    seqs_h_tc9                                           
+#   parent sequence (full name)  string            53    uvm_test_top.async_fifo_env.agent_h.seqr_h.seqs_h_tc9
+#   sequencer                    string            42    uvm_test_top.async_fifo_env.agent_h.seqr_h           
+# ------------------------------------------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_mon.sv(22) @ 192: uvm_test_top.async_fifo_env.agent_h.mon_h [async_fifo_mon : ] Packet Received at MON is ---------------------------------------
+# Name      Type              Size  Value
+# ---------------------------------------
+# trans_h   async_fifo_trans  -     @982 
+#   wdata   integral          8     209  
+#   winc    integral          1     1    
+#   rinc    integral          1     'd0  
+#   rdata   integral          8     'd0  
+#   rempty  integral          1     'd0  
+#   wfull   integral          1     'd0  
+# ---------------------------------------
+# 
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 192: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# 
+# ------------------------------------------------------------------------
+# 			SCOREBOARD SUMMARY										
+# ------------------------------------------------------------------------
+# 
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 21 == wdata: 21
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 80 == wdata: 80
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 43 == wdata: 43
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 43 == wdata: 43
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 162 == wdata: 162
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 22 == wdata: 22
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 93 == wdata: 93
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 212 == wdata: 212
+# UVM_INFO ../ENV/async_fifo_sb.sv(204) @ 192: uvm_test_top.async_fifo_env.sb_h [SB PASSED:] |DATA MATCHED| => rdata: 212 == wdata: 212
+# ------------------------------------------------------------------------
+# mem_model[0] = 21
+# mem_model[1] = 80
+# mem_model[2] = 43
+# mem_model[3] = 43
+# mem_model[4] = 162
+# mem_model[5] = 22
+# mem_model[6] = 93
+# mem_model[7] = 212
+# mem_model[8] = 212
+# mem_model[9] = 175
+# mem_model[10] = 19
+# mem_model[11] = 94
+# mem_model[12] = 209
+# mem_model[13] = 209
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :   47
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [Questa UVM]     2
+# [RESET_DONE]     1
+# [RNTST]     1
+# [SB PASSED:]     9
+# [TEST_DONE]     1
+# [UVMTOP]     1
+# [async_fifo_drv : ]    16
+# [async_fifo_mon : ]    16
+# ** Note: $finish    : C:/questasim64_10.7c/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 192 ns  Iteration: 61  Instance: /async_fifo_top
+# Saving coverage database on exit...
+# End time: 22:20:27 on Mar 03,2025, Elapsed time: 0:00:02
 # Errors: 0, Warnings: 0

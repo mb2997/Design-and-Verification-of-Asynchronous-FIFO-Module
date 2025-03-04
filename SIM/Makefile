@@ -12,11 +12,6 @@ help:
 	@echo " cmp   		=>  Compile the whole code"
 	@echo " sim    		=>  Simulate and run the code"
 	@echo " run-all    		=>  Run above all targets sequencially"
-	
-##	@echo " run-tc1   		=>  Run testcase - 1 for fifo full"
-##	@echo " run-tc2    		=>  Run testcase - 2 for fifo empty"
-##	@echo " run-tc3    		=>  Run testcase - 3 for fifo reset"
-##	@echo " run-tc4    		=>  Run testcase - 4 for fifo RW simultaniously"
 	@echo =================================================================================
 
 lib :
@@ -49,8 +44,14 @@ sim6 :
 sim7 :
 	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc7.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_write_read_max_data_range_test
 
+sim8 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc8.ucdb; run -all; exit" +WRITE_FAST +UVM_TESTNAME=async_fifo_write_faster_than_read_test
+
+sim9 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc9.ucdb; run -all; exit" +READ_FAST +UVM_TESTNAME=async_fifo_read_faster_than_write_test
+
 merge :
-	vcover merge mergecov.ucdb tc1.ucdb tc2.ucdb tc3.ucdb tc4.ucdb tc5.ucdb tc6.ucdb tc7.ucdb
+	vcover merge mergecov.ucdb tc1.ucdb tc2.ucdb tc3.ucdb tc4.ucdb tc5.ucdb tc6.ucdb tc7.ucdb tc8.ucdb tc9.ucdb
 
 report :
 	vcover report -details -html mergecov.ucdb
@@ -67,5 +68,7 @@ tc4 : lib cmp sim4
 tc5 : lib cmp sim5
 tc6 : lib cmp sim6
 tc7 : lib cmp sim7
+tc8 : lib cmp sim8
+tc9 : lib cmp sim9
 
-reg : lib cmp sim1 sim2 sim3 sim4 sim5 sim6 sim7 merge report
+reg : lib cmp sim1 sim2 sim3 sim4 sim5 sim6 sim7 sim8 sim9 merge report
