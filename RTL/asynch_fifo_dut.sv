@@ -13,19 +13,20 @@ module asynch_fifo_dut #(parameter DATA_WIDTH=8, ADDR_WIDTH=4) (output [DATA_WID
     sync_w2r #(ADDR_WIDTH) SYNC_W2R (.*);
 
     fifomem #(DATA_WIDTH, ADDR_WIDTH) FIFOMEM (.rdata(rdata),
-                                               .wdata(wdata),
-                                               .waddr(waddr),
-                                               .raddr(raddr),
-                                               .wclken(winc),
-                                               .rclken(rinc),
-                                               .wfull(wfull),
-                                               .rempty(rempty),
-                                               .rclk(rclk),
-                                               .wclk(wclk));
+                                           .wdata(wdata),
+                                           .waddr(waddr),
+                                           .raddr(raddr),
+                                           .wclken(winc),
+                                           .rclken(rinc),
+                                           .wfull(wfull),
+                                           .rempty(rempty),
+                                           .wrst_n(wrst_n),
+                                           .rrst_n(rrst_n),
+                                           .rclk(rclk),
+                                           .wclk(wclk));
 
     rptr_empty #(ADDR_WIDTH) RPTR_EMPTY (.*);
 
     wptr_full #(ADDR_WIDTH) WPTR_FULL (.*);
-
 
 endmodule
