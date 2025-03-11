@@ -1,17 +1,74 @@
-RTL=../RTL/*
-TB=../TB/*
-TBModule=async_fifo_top_tb
+#Makefile
+RTL=../RTL/*.sv
+RTLModule=asynch_fifo_dut
+TB=../TOP/async_fifo_top.sv
+TBModule=async_fifo_top
+PKG=../TEST/async_fifo_pkg.sv
 
-clean:
-	@if exist work rmdir /s /q work
 
-lib:
+help:
+	@echo =================================================================================
+	@echo " lib   		=>  Make work directory"                            			
+	@echo " cmp   		=>  Compile the whole code"
+	@echo " sim    		=>  Simulate and run the code"
+	@echo " run-all    		=>  Run above all targets sequencially"
+	@echo =================================================================================
+
+lib :
 	vlib work
+	
+cmp :
+	vlog -coveropt 3 +acc +cover $(RTL) $(PKG) $(TB) +incdir+../ENV +incdir+../TEST
 
-cmp:
-	vlog -coveropt 3 +acc +cover $(RTL) $(TB)
+sim :
+	vsim -coverage -vopt $(TBModule) -c -do "run -all; exit" +UVM_TESTNAME=async_fifo_full_test
 
-sim:
-	vsim -vopt -coverage $(TBModule) -c -do "run -all; exit"
+sim1 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc1.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_full_test +UVM_VERBOSITY=UVM_LOW
 
-all: clean lib cmp sim
+sim2 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc2.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_empty_test +UVM_VERBOSITY=UVM_LOW
+
+sim3 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc3.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_b2b_write_read_test +UVM_VERBOSITY=UVM_LOW
+
+sim4 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc4.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_write_at_full_test +UVM_VERBOSITY=UVM_LOW
+
+sim5 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc5.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_read_at_empty_test +UVM_VERBOSITY=UVM_LOW
+
+sim6 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc6.ucdb; run -all; exit" +MID_RESET +UVM_TESTNAME=async_fifo_reset_test +UVM_VERBOSITY=UVM_LOW
+
+sim7 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc7.ucdb; run -all; exit" +UVM_TESTNAME=async_fifo_write_read_max_data_range_test +UVM_VERBOSITY=UVM_LOW
+
+sim8 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc8.ucdb; run -all; exit" +WRITE_FAST +UVM_TESTNAME=async_fifo_write_faster_than_read_test +UVM_VERBOSITY=UVM_LOW
+
+sim9 :
+	vsim -coverage -vopt $(TBModule) -c -do "coverage save -onexit tc9.ucdb; run -all; exit" +READ_FAST +UVM_TESTNAME=async_fifo_read_faster_than_write_test +UVM_VERBOSITY=UVM_LOW
+
+merge :
+	vcover merge mergecov.ucdb tc1.ucdb tc2.ucdb tc3.ucdb tc4.ucdb tc5.ucdb tc6.ucdb tc7.ucdb tc8.ucdb tc9.ucdb
+
+report :
+	vcover report -details -html mergecov.ucdb
+
+all : lib cmp sim
+
+t2c :
+	vcover report -details -html tc2.ucdb
+
+tc1 : lib cmp sim1
+tc2 : lib cmp sim2
+tc3 : lib cmp sim3
+tc4 : lib cmp sim4
+tc5 : lib cmp sim5
+tc6 : lib cmp sim6
+tc7 : lib cmp sim7
+tc8 : lib cmp sim8
+tc9 : lib cmp sim9
+
+reg : lib cmp sim1 sim2 sim3 sim4 sim5 sim6 sim7 sim8 sim9 merge report

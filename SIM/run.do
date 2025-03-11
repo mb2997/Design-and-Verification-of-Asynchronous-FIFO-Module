@@ -1,6 +1,7 @@
-if [file exists "work"] {vdel -all}
 vlib work
-vlog -coveropt 3 +acc +cover ../RTL/* ../TB/*
-vsim -vopt -coverage async_fifo_top_tb
+vlog -coveropt 3 +acc +cover ../RTL/*.sv ../TEST/async_fifo_pkg.sv ../TOP/async_fifo_top.sv +incdir+../RTL +incdir+../ENV +incdir+../TEST
+vsim -coverage -vopt async_fifo_top +READ_FAST +UVM_TESTNAME=async_fifo_read_faster_than_write_test
+run 1ns
+log -r /*
 do wave.do
 run -all
